@@ -1,6 +1,7 @@
 import boto3
 import uuid
 import os
+import json
 
 def load_body(event):
     if 'body' not in event:
@@ -30,7 +31,7 @@ def lambda_handler(event, context):
     try:
         # Entrada
         info({"event": event})
-    
+
         body = event.get("body")
         if isinstance(body, str):
             body = json.loads(body)
