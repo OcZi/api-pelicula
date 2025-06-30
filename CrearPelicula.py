@@ -48,6 +48,10 @@ def lambda_handler(event, context):
             'pelicula_datos': pelicula_datos
         }
 
+        if "nombre" not in pelicula_datos or not pelicula_datos["nombre"]:
+            raise ValueError("El campo 'nombre' es obligatorio en pelicula_datos")
+
+
         dynamodb = boto3.resource('dynamodb')
         table = dynamodb.Table(nombre_tabla)
         response = table.put_item(Item=pelicula)
